@@ -3,16 +3,18 @@ import helmet from 'helmet';
 import { Store } from 'express-session';
 import { configure, Plan } from "@dwp/govuk-casa";
 import express, { Request, Response } from 'express';
+import { MemoryStore } from 'express-session';
 
 const app = (
   name: string,
   secret: string,
   ttl: number,
   secure: boolean,
-  sessionStore: Store,
 ) => {
   const casaApp = express();
   casaApp.use(helmet.noSniff());
+
+  const store = new MemoryStore();
 
   const viewDir = path.join(__dirname, './views/');
   const localesDir = path.join(__dirname, './locales/');
@@ -30,7 +32,7 @@ const app = (
       secret,
       ttl,
       secure,
-      store: sessionStore,
+      store,
     },
     pages: [
       {

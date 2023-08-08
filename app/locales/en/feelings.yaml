@@ -1,0 +1,5 @@
+pageTitle: "Feelings"
+question: "How are you feeling?"
+label: "Enter your feelings"
+errorMessage: "Please enter you feel"
+length: "Description cannot exceed 100 characters"

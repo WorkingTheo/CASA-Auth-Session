@@ -1,4 +1,5 @@
 {% extends "layouts/main.njk" %}
+{% from "casa/components/radios/macro.njk" import casaGovukRadios with context %}
 
 {% block casaPageTitle %}
   {{ t('start:pageTitle') }}
@@ -8,4 +9,7 @@
   <h1 class="govuk-heading-xl">
     {{ t('start:title') }}
   </h1>
+
+  <a href="/authenticated/name">Authenticated</a>
+  <a href="/unauthenticated/name">Unauthenticated</a>
 {% endblock %}

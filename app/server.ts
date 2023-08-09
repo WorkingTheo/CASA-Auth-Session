@@ -79,7 +79,7 @@ expressApp.post('/message', (request: Request, response: Response, next: NextFun
 
   sendEventsToAll(message);
   response.sendStatus(200);
-})
+});
 
 const getStore = (store: string) => {
   if (store === 'authenticated') {

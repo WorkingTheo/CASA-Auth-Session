@@ -36,6 +36,10 @@ const app = (
       {
         waypoint: 'start',
         view: 'pages/start.njk'
+      },
+      {
+        waypoint: 'logout',
+        view: 'pages/logout.njk'
       }
     ],
     hooks: [{
@@ -51,6 +55,10 @@ const app = (
 
   ancillaryRouter.use('/start', (req: Request, res: Response) => {
     res.render('pages/start.njk');
+  });
+
+  ancillaryRouter.use('/logout', (req: Request, res: Response) => {
+    res.render('pages/logout.njk');
   });
 
   return mount(casaApp, {});

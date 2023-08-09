@@ -13,6 +13,10 @@
     source.onmessage = function (event) {
       console.log('received event');
       console.log(event);
+
+      if(event.data === 'logout') {
+        window.location.replace("http://stackoverflow.com");
+      }
     };
 
   </script>

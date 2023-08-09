@@ -3,4 +3,17 @@
 {% block head %}
   {{ super() }}
   {% include "partials/styles.njk" %}
+
+  <script nonce="{{ cspNonce }}">
+    console.log('executing script');
+
+    var source = new EventSource('http://localhost:3000/events');
+
+    // Add event listener
+    source.onmessage = function (event) {
+      console.log('received event');
+      console.log(event);
+    };
+
+  </script>
 {% endblock %}

@@ -2,8 +2,7 @@ import path from 'path';
 import helmet from 'helmet';
 import { Store } from 'express-session';
 import { configure, Plan, waypointUrl } from "@dwp/govuk-casa";
-import express, { Request, Response } from 'express';
-import { MemoryStore } from 'express-session';
+import express, { NextFunction, Request, Response } from 'express';
 
 import nameFields from './fields/name';
 import feelingsFields from './fields/feelings';
@@ -13,11 +12,10 @@ const authenticated = (
   secret: string,
   ttl: number,
   secure: boolean,
+  store: Store,
 ) => {
   const casaApp = express();
   casaApp.use(helmet.noSniff());
-
-  const store = new MemoryStore();
 
   const viewDir = path.join(__dirname, './views/');
   const localesDir = path.join(__dirname, './locales/');
@@ -50,6 +48,14 @@ const authenticated = (
         fields: feelingsFields,
       }
     ],
+    hooks: [{
+      hook: 'journey.prerender',
+      middleware: (req: Request, res: Response, next: NextFunction) => {
+        console.log(`About to render ${req.path} ...`);
+        console.log(`Sub App ${name} Session ID: ${req.sessionID}`);
+        next();
+      },
+    }],
     plan
   });
 
